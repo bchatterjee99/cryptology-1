@@ -1,0 +1,11 @@
+#-*-sh-*-
+
+file=aaa.c
+
+if gcc $file; then
+    echo -e "\n\n  compile hoe geche\n\n"
+    ./a.out
+else
+    echo -e "\n\n  hocche na\n\n"
+    # gcc $file 2>&1 | head
+fi

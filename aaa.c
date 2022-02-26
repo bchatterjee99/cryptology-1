@@ -1,0 +1,100 @@
+#include <stdio.h>
+
+#define PRINT1 1
+
+// show register value in bits
+void show_reg(int reg, int n)
+{
+    int i = 1<<(n-1);
+    while(i > 0)
+    {
+	printf("%d", !!(reg&i));
+	i = i>>1;
+    }
+}
+
+// run register circuit for a polynomial
+int shift(int n, int polynomial)
+{
+    int reg = 1;
+    reg = 2; // 101
+    
+    int start = reg;
+    int position = n-1;
+
+    int h = 1<<n;
+    int visited[h];
+    for(int i=0; i<h; i++) visited[i] = 0;
+
+    int count = 0;
+    while(1)
+    {
+	if(visited[reg])
+	{
+	    if(PRINT1)
+	    {
+		printf("reg = "); show_reg(reg, n);
+		printf("  "); printf("repeat\n");
+	    }
+	    /* if(reg != start) */
+	    /* { */
+	    /* 	printf("non-start end -"); show_reg(reg, n); printf("  "); */
+	    /* } */
+	    /* else */
+	    /* { */
+	    /* 	printf("start-end      "); */
+	    /* } */
+	    break;   
+	}
+	visited[reg] = 1; count++;
+	if(PRINT1)
+	{
+	    printf("reg = "); show_reg(reg, n);
+	    printf("  ");
+	}
+
+	int bit = 0;
+	for(int i=0; i<n; i++)
+	    bit = bit ^ (!!((reg & polynomial) & (1<<i)));
+	if(PRINT1)
+	{
+	    printf("bit = %d\n", bit);
+	}
+
+	reg = reg >> 1;
+	reg = reg | (bit << position);
+    }
+    return count;
+}
+
+// loop over all polynomials of degree n
+int polynomials(int n)
+{
+    int U = 1<<n;
+    int polynomial;
+    int count = 0;
+    for(polynomial = 0; polynomial<U; polynomial++)
+    {
+	int x = shift(n, polynomial);
+	if(x == ((1<<n)-1))
+	{
+	    printf("primitive   1");   
+	    show_reg(polynomial, n);
+	    printf("\n");
+	    count++;
+	}
+	/* if(x == (1<<n)) */
+	/* { */
+	/*     printf("2^n cycle\n"); */
+	/* } */
+    }
+    return count;
+}
+
+
+int main()
+{
+    int ans = shift(3, 6);
+    // int ans = polynomials(3);
+    return 0;
+}
