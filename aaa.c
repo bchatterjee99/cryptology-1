@@ -78,7 +78,7 @@ int polynomials(int n)
 	int x = shift(n, polynomial);
 	if(x == ((1<<n)-1))
 	{
-	    printf("primitive   1");   
+	    printf("1");   
 	    show_reg(polynomial, n);
 	    printf("\n");
 	    count++;
