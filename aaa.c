@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#define PRINT1 0
+#define PRINT1 1
 
 // show register value in bits
 void show_reg(int reg, int n)
@@ -94,16 +94,15 @@ int polynomials(int n)
 
 int main()
 {
-    // int ans = shift(3, 6);
-    for(int i=4; i<=16; i++)
-    {
-	printf("degree %d:\n", i);
-	int ans = polynomials(i);
-	printf("count = %d\n", ans);
-	printf("\n\n");
-    }
+    int ans = shift(4, 3);
+    /* for(int i=4; i<=16; i++) */
+    /* { */
+    /* 	printf("degree %d:\n", i); */
+    /* 	int ans = polynomials(i); */
+    /* 	printf("count = %d\n", ans); */
+    /* 	printf("\n\n"); */
+    /* } */
 
-
-    // int ans = polynomials(4);
+    //int ans = polynomials(4);
     return 0;
 }

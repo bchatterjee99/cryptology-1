@@ -1,0 +1,16 @@
+reg = 0001  bit = 1
+reg = 1000  bit = 0
+reg = 0100  bit = 0
+reg = 0010  bit = 1
+reg = 1001  bit = 1
+reg = 1100  bit = 0
+reg = 0110  bit = 1
+reg = 1011  bit = 0
+reg = 0101  bit = 1
+reg = 1010  bit = 1
+reg = 1101  bit = 1
+reg = 1110  bit = 1
+reg = 1111  bit = 0
+reg = 0111  bit = 0
+reg = 0011  bit = 0
+reg = 0001  repeat
