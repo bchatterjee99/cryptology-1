@@ -1,6 +1,6 @@
 #-*-sh-*-
 
-file=aaa.c
+file=rc4.c
 
 if gcc $file; then
     # echo -e "\n\n  compile hoe geche\n\n"

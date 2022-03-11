@@ -1,6 +1,9 @@
 #include <stdio.h>
+#include <time.h>
 
 #define PRINT1 0
+
+
 
 // show register value in bits
 void show_reg(int reg, int n)
@@ -11,13 +14,14 @@ void show_reg(int reg, int n)
 	printf("%d", !!(reg&i));
 	i = i>>1;
     }
+    /* !!(number) changes non-zero to 1 (keeps 0, 0) */
 }
 
 // run register circuit for a polynomial
 int shift(int n, int polynomial)
 {
     int reg = 1;
-    // reg = 2; // 101
+    // reg = 5; // 101
     
     int start = reg;
     int position = n-1;
@@ -54,8 +58,11 @@ int shift(int n, int polynomial)
 	}
 
 	int bit = 0;
+	int temp = reg & polynomial;
 	for(int i=0; i<n; i++)
-	    bit = bit ^ (!!((reg & polynomial) & (1<<i)));
+	    bit = bit ^ (!!(temp & (1<<i)));
+	/* !!(number) changes non-zero to 1 (keeps 0, 0) */
+
 	if(PRINT1)
 	{
 	    printf("bit = %d\n", bit);
@@ -95,6 +102,7 @@ int polynomials(int n)
 int main()
 {
     // int ans = shift(4, 3);
+    clock_t clock1 = clock();
     for(int i=4; i<=16; i++)
     {
 	printf("degree %d:\n", i);
@@ -102,7 +110,10 @@ int main()
 	printf("count = %d\n", ans);
 	printf("\n\n");
     }
+    clock1 = clock() - clock1;
+    printf("time: %lf seconds\n\n", ((float)clock1)/CLOCKS_PER_SEC);
 
-    //int ans = polynomials(4);
+    // int ans = polynomials(3);
     return 0;
 }
+/* 57.8 seconds */

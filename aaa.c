@@ -1,6 +1,9 @@
 #include <stdio.h>
+#include <time.h>
 
 #define PRINT1 0
+
+
 
 // show register value in bits
 void show_reg(int reg, int n)
@@ -95,6 +98,7 @@ int polynomials(int n)
 int main()
 {
     // int ans = shift(4, 3);
+    clock_t clock1 = clock();
     for(int i=4; i<=16; i++)
     {
 	printf("degree %d:\n", i);
@@ -102,7 +106,11 @@ int main()
 	printf("count = %d\n", ans);
 	printf("\n\n");
     }
+    clock1 = clock() - clock1;
+    printf("time: %lf seconds\n\n", ((float)clock1)/CLOCKS_PER_SEC);
 
-    //int ans = polynomials(4);
+    // int ans = polynomials(3);
     return 0;
 }
+/* 57.8 seconds */
+

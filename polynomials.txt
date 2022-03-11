@@ -5760,3 +5760,5 @@ degree 16:
 count = 2048
 
 
+time: 57.294888 seconds
+
