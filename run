@@ -1,10 +1,11 @@
 #-*-sh-*-
 
-file=rc4.c
+file=stream-cipher.c
+# file=faltu.c
 
 if gcc $file; then
     # echo -e "\n\n  compile hoe geche\n\n"
-    ./a.out
+    taskset 0x00000002 ./a.out # ekta cpu core e choluk
 else
     echo -e "\n\n  hocche na\n\n"
     # gcc $file 2>&1 | head

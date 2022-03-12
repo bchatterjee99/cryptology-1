@@ -14,14 +14,14 @@ plot "rc4_z1_data.txt" with candlesticks
 
 
 
-# set terminal png size 800, 600
-# set output "rc4_z2_plot.png"
+set terminal png size 800, 600
+set output "rc4_z2_plot.png"
 
-# set xrange [-10: 270]
-# set yrange [-1: 4]
+set xrange [-10: 270]
+set yrange [-1: 4]
 
-# set title "Z2 data"
-# set ylabel "Pr[Z2 = i] * 256"
-# set xlabel "i"
+set title "Z2 data"
+set ylabel "Pr[Z2 = i] * 256"
+set xlabel "i"
 
-# plot "rc4_z2_data.txt" with candlesticks
+plot "rc4_z2_data.txt" with candlesticks

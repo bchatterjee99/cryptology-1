@@ -47,10 +47,10 @@ int J = 0;
     int k = 2;
     while(k--)
     {
-	I = I + 1;     I = I % 256;
-	J = J + S[I];  J = J % 256;
+	I = I + 1;     I = I & 0xff;
+	J = J + S[I];  J = J & 0xff;
 	swap(&S[I], &S[J]);
-	Z[1 - k] = S[(S[I] + S[J]) % 256];
+	Z[1 - k] = S[(S[I] + S[J]) & 0xff];
     }
 }
 
