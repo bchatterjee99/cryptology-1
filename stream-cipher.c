@@ -22,6 +22,8 @@
 /* #define KEY1 0x5   //      ___0 0101 */
 /* #define KEY2 0x49  //      _100 1001 */
 /* #define KEY3 0x358 // _011 0101 1000 */
+// lcm(31, 127, 2047) = 8059039
+// 31 * 127 * 2047) = 8059039
 
 
 #define L1 4
@@ -33,6 +35,8 @@
 #define KEY1 0x5
 #define KEY2 0x5
 #define KEY3 0x5
+// lcm(15, 63, 255) = 5355
+// 15 * 63 * 255 = 240975
 
 
 // maximum message length in bits
@@ -40,8 +44,8 @@
 #define MAX_MESG_LEN 1000
 
 #define PRINT1 1
-#define FRONT 10000
-#define BACK 380000
+#define FRONT 10000000
+#define BACK 39
 
 unsigned char *visited; // use every bit for marking states
 /* 
