@@ -6,9 +6,34 @@
 /* #define L1 7 */
 /* #define L2 11 */
 /* #define L3 13 */
-#define L1 5
-#define L2 7
-#define L3 11
+/* #define POLY1 0b0000011       // 7 degree polynomial *\/ */
+/* #define POLY2 0b00000000101   // 11 degree polynomial *\/ */
+/* #define POLY3 0b0000000011011 // 13 degree polynomial *\/ */
+/* #define KEY1 0x5   //           _000 0101 */
+/* #define KEY2 0x89  //      _000 1000 1001 */
+/* #define KEY3 0x358 // ___0 0011 0101 1000 */
+
+/* #define L1 5 */
+/* #define L2 7 */
+/* #define L3 11 */
+/* #define POLY1  0b00101       // 5 degree polynomial */
+/* #define POLY2  0b0000011     // 7 degree polynomial */
+/* #define POLY3  0b00000000101 // 11 degree polynomial */
+/* #define KEY1 0x5   //      ___0 0101 */
+/* #define KEY2 0x49  //      _100 1001 */
+/* #define KEY3 0x358 // _011 0101 1000 */
+
+
+#define L1 4
+#define L2 6
+#define L3 8
+#define POLY1 0b0011
+#define POLY2 0b000011
+#define POLY3 0b00011101
+#define KEY1 0x5 
+#define KEY2 0x5
+#define KEY3 0x5
+
 
 // maximum message length in bits
 // #define MAX_MESG_LEN 8059039 // key-stream-period
@@ -24,6 +49,7 @@ unsigned char *visited; // use every bit for marking states
    the state is calculated as [reg1 << (L2 + L3) | reg2 << (L3) | reg3 ]
    hightest state is [2^(L1 + L2 + L3) - 1]
    some might be unused as zero register states are not used
+   mainly needed for non primitive polynomial
 */
 unsigned long v_len;
 // check pos'th  bit in the visited array
@@ -93,24 +119,15 @@ int key_stream()
     int reg2, poly2; // L2
     int reg3, poly3; // L3
 
-    /* // secret key */
-    /* reg1 = 0x5;      //           _000 0101 */
-    /* reg2 = 0x89;     //      _000 1000 1001 */
-    /* reg3 = 0x358;    // ___0 0011 0101 1000 */
-
-    /* // polynomials (hightest bit implicit) */
-    /* poly1 = 0b0000011; // 7 degree polynomial */
-    /* poly2 = 0b00000000101; // 11 degree polynomial */
-    /* poly3 = 0b0000000011011; // 13 degree polynomial */
-
     // secret key
-    reg1 = 0x5;   //      ___0 0101
-    reg2 = 0x49;  //      _100 1001
-    reg3 = 0x358; // _011 0101 1000
+    reg1 = KEY1;
+    reg2 = KEY2;
+    reg3 = KEY3;
 
-    poly1 = 0b00101; // 5 degree polynomial
-    poly2 = 0b0000011; // 7 degree polynomial
-    poly3 = 0b00000000101; // 11 degree polynomial
+    // polynomials
+    poly1 = POLY1;
+    poly2 = POLY2;
+    poly3 = POLY3;
 
     // maximum number of distinct register states
     unsigned long max_itr = ((unsigned long)1<<L1) - 1;
@@ -180,25 +197,16 @@ void encrypt(char* message, unsigned long len)
     int reg1, poly1; // L1
     int reg2, poly2; // L2
     int reg3, poly3; // L3
-
-    /* // secret key */
-    /* reg1 = 0x5;      //           _000 0101 */
-    /* reg2 = 0x89;     //      _000 1000 1001 */
-    /* reg3 = 0x358;    // ___0 0011 0101 1000 */
-
-    /* // polynomials (hightest bit implicit) */
-    /* poly1 = 0b0000011; // 7 degree polynomial */
-    /* poly2 = 0b00000000101; // 11 degree polynomial */
-    /* poly3 = 0b0000000011011; // 13 degree polynomial */
-
+    
     // secret key
-    reg1 = 0x5;   //      ___0 0101
-    reg2 = 0x49;  //      _100 1001
-    reg3 = 0x358; // _011 0101 1000
+    reg1 = KEY1;
+    reg2 = KEY2;
+    reg3 = KEY3;
 
-    poly1 = 0b00101; // 5 degree polynomial
-    poly2 = 0b0000011; // 7 degree polynomial
-    poly3 = 0b00000000101; // 11 degree polynomial
+    // polynomials
+    poly1 = POLY1;
+    poly2 = POLY2;
+    poly3 = POLY3;
 
     // maximum number of distinct register states
     unsigned long max_itr = ((unsigned long)1<<L1) - 1;

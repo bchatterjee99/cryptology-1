@@ -1,40 +1,5 @@
 #include <stdio.h>
 
-
-
-void truncate()
-{
-    FILE* fp1 = fopen("stream-cipher_output.txt", "r");
-    long size = 0;
-    while(1)
-    {
-	int c = fgetc(fp1);
-	if(c == EOF) break;
-
-	size++;
-    }
-    fclose(fp1);
-
-    printf("hoe geche\n");
-
-    fp1 = fopen("streamp-cipher_output.txt", "r");
-    FILE* fp2 = fopen("stream-cipher_output_truncated.txt", "w");
-    int i = 0;
-    while(1)
-    {
-	int c = fgetc(fp1);
-	if(c == EOF) break;
-	char ch = fgetc(fp1);
-	if(i <= 10000 || i >= size - 10000) 
-	    fprintf(fp2, "%c", ch);
-
-	i++;
-    }
-    fclose(fp1);
-    fclose(fp2);
-}
-
-
 void test1()
 {
     long x = ((unsigned int)1) << 31;
@@ -53,8 +18,30 @@ void test1()
     }
 }
 
+unsigned long gcd(unsigned long a, unsigned long b)
+{
+    if(b == 0) return a;
+    if(a == 0) return b;
+    return gcd(b, a%b);
+}
+
+void test2()
+{
+    int i,j;
+    for(i = 0; i<=20; i++)
+    {
+	for(j=i+1; j<=20; j++)
+	{
+	    unsigned long x = (((unsigned long) 1)<<i) - 1;
+	    unsigned long y = (((unsigned long) 1)<<j) - 1;
+	    unsigned long g = gcd(x, y);
+	    printf("%d %d: %d\n", x, y, g);
+	}
+    }
+}
+
 int main()
 {
-    truncate();
+    test2();
     return 0;
 }
