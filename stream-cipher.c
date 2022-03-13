@@ -30,7 +30,7 @@
 #define POLY1 0b0011
 #define POLY2 0b000011
 #define POLY3 0b00011101
-#define KEY1 0x5 
+#define KEY1 0x5
 #define KEY2 0x5
 #define KEY3 0x5
 
@@ -48,8 +48,6 @@ unsigned char *visited; // use every bit for marking states
    the visited array has to have 2^(L1+L2+L3) bits
    the state is calculated as [reg1 << (L2 + L3) | reg2 << (L3) | reg3 ]
    hightest state is [2^(L1 + L2 + L3) - 1]
-   some might be unused as zero register states are not used
-   mainly needed for non primitive polynomial
 */
 unsigned long v_len;
 // check pos'th  bit in the visited array
