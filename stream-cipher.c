@@ -44,8 +44,8 @@
 #define MAX_MESG_LEN 1000
 
 #define PRINT1 1
-#define FRONT 10000000
-#define BACK 39
+#define FRONT 1000000
+#define BACK 1000
 
 unsigned char *visited; // use every bit for marking states
 /* 
@@ -278,8 +278,8 @@ void test1()
 
 void test2()
 {
-    char* message = "ABC"; // 0100 0001 0100 0010 0100 0011
-    int len = 3;
+    char* message = "cryptology"; // 0100 0001 0100 0010 0100 0011
+    int len = 10;
 
     if(len > MAX_MESG_LEN)
     {
