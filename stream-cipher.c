@@ -19,6 +19,12 @@
 #define BACK 380000
 
 unsigned char *visited; // use every bit for marking states
+/* 
+   the visited array has to have 2^(L1+L2+L3) bits
+   the state is calculated as [reg1 << (L2 + L3) | reg2 << (L3) | reg3 ]
+   hightest state is [2^(L1 + L2 + L3) - 1]
+   some might be unused as zero register states are not used
+*/
 unsigned long v_len;
 // check pos'th  bit in the visited array
 int check_visited(unsigned long pos)
@@ -309,10 +315,10 @@ int main()
     num_register_states = num_register_states * ((((unsigned long) 1)<<L2) - 1 );
     num_register_states = num_register_states * ((((unsigned long) 1)<<L3) - 1 );
 
-    /* printf("No of distinct non-zero (combined)register states: %lu\n\n", num_register_states); */
-    /* test1(); */
+    printf("No of distinct non-zero (combined)register states: %lu\n\n", num_register_states);
+    test1();
 
-    test2();
+    // test2();
     
     free(visited);
     return 0;
