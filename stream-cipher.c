@@ -107,7 +107,9 @@ int key_stream()
     poly3 = 0b00000000101; // 11 degree polynomial
 
     // maximum number of distinct register states
-    unsigned long max_itr = ((unsigned long)1)<<(L1+L2+L3);
+    unsigned long max_itr = ((unsigned long)1<<L1) - 1;
+    max_itr = max_itr * ((((unsigned long) 1)<<L2) - 1 );
+    max_itr = max_itr * ((((unsigned long) 1)<<L3) - 1 );
     unsigned long itr = 0;
 
     // run until some registers state is repeated
@@ -159,7 +161,7 @@ int key_stream()
 	    }
 	}
     }
-    
+    return 0;
 }
 
 int key_string[MAX_MESG_LEN];
@@ -193,7 +195,9 @@ void encrypt(char* message, unsigned long len)
     poly3 = 0b00000000101; // 11 degree polynomial
 
     // maximum number of distinct register states
-    unsigned long max_itr = ((unsigned long)1)<<(L1+L2+L3);
+    unsigned long max_itr = ((unsigned long)1<<L1) - 1;
+    max_itr = max_itr * ((((unsigned long) 1)<<L2) - 1 );
+    max_itr = max_itr * ((((unsigned long) 1)<<L3) - 1 );
     unsigned long itr = 0;
 
     // run until some registers state is repeated
@@ -247,7 +251,7 @@ void encrypt(char* message, unsigned long len)
 	    break;
 	}
     }
-    printf("\n\n");
+    // printf("\n\n");
 }
 
 
@@ -301,7 +305,12 @@ int main()
     visited=(unsigned char*)malloc( ((unsigned long)1)<<(L1+L2+L3-3) );
     v_len = ((unsigned long)1)<<(L1+L2+L3-3);
     memset(visited, 0, v_len);
-    // printf("v_len = %lu\n\n", v_len);
+    unsigned long num_register_states = ((unsigned long)1<<L1) - 1;
+    num_register_states = num_register_states * ((((unsigned long) 1)<<L2) - 1 );
+    num_register_states = num_register_states * ((((unsigned long) 1)<<L3) - 1 );
+
+    /* printf("No of distinct non-zero (combined)register states: %lu\n\n", num_register_states); */
+    /* test1(); */
 
     test2();
     
