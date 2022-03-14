@@ -59,16 +59,16 @@ unsigned long v_len;
 // check pos'th  bit in the visited array
 int check_visited(unsigned long pos)
 {
-    unsigned long x = pos/8;
-    unsigned long y = pos%8;
+    unsigned long x = pos>>3; // pos/8;
+    unsigned long y = pos & 0x7; // pos%8;
     int ans = !!(visited[x]&(1<<y));
     return ans;
 }
 // set pos'th  bit in the visited array
 void set_visited(unsigned long pos)
 {
-    unsigned long x = pos/8;
-    unsigned long y = pos%8;
+    unsigned long x = pos>>3; // pos/8;
+    unsigned long y = pos & 0x7; // pos%8;
     visited[x] = visited[x]|(1<<y);
 }
 
